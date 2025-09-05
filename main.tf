@@ -86,11 +86,12 @@ resource "kubernetes_cluster_role_binding" "this" {
 
 resource "kubernetes_secret_v1" "this" {
   metadata {
-    name      = "${kubernetes_service_account.this.metadata[0].name}-token"
     namespace = var.service_account_namespace
     annotations = {
       "kubernetes.io/service-account.name" = kubernetes_service_account.this.metadata[0].name
     }
+
+    generate_name = "${kubernetes_service_account.this.metadata[0].name}-token-"
   }
 
   type = "kubernetes.io/service-account-token"
