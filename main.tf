@@ -3,6 +3,8 @@ resource "kubernetes_service_account" "this" {
     name      = var.service_account_name
     namespace = var.service_account_namespace
   }
+
+  automount_service_account_token = var.automount_service_account_token
 }
 
 resource "kubernetes_role" "this" {

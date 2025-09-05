@@ -78,3 +78,9 @@ variable "cluster_role_permissions" {
     error_message = "Each rule in cluster_role_permissions must have at least one verb defined."
   }
 }
+
+variable "automount_service_account_token" {
+  description = "Whether pods running as this ServiceAccount should have an API token automatically mounted."
+  type        = bool
+  default     = false
+}
