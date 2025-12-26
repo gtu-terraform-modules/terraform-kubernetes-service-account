@@ -7,7 +7,7 @@ resource "kubernetes_service_account_v1" "this" {
   automount_service_account_token = var.automount_service_account_token
 }
 
-resource "kubernetes_role" "this" {
+resource "kubernetes_role_v1" "this" {
   count = var.create_role ? 1 : 0
 
   metadata {
@@ -54,7 +54,7 @@ resource "kubernetes_role_binding" "this" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
-    name      = kubernetes_role.this[0].metadata[0].name
+    name      = kubernetes_role_v1.this[0].metadata[0].name
   }
 
   subject {
