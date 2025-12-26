@@ -25,7 +25,7 @@ resource "kubernetes_role_v1" "this" {
   }
 }
 
-resource "kubernetes_cluster_role" "this" {
+resource "kubernetes_cluster_role_v1" "this" {
   count = var.create_cluster_role ? 1 : 0
 
   metadata {
@@ -43,7 +43,7 @@ resource "kubernetes_cluster_role" "this" {
   }
 }
 
-resource "kubernetes_role_binding" "this" {
+resource "kubernetes_role_binding_v1" "this" {
   count = var.create_role ? 1 : 0
 
   metadata {
@@ -64,7 +64,7 @@ resource "kubernetes_role_binding" "this" {
   }
 }
 
-resource "kubernetes_cluster_role_binding" "this" {
+resource "kubernetes_cluster_role_binding_v1" "this" {
   count = var.create_cluster_role ? 1 : 0
 
   metadata {
@@ -74,7 +74,7 @@ resource "kubernetes_cluster_role_binding" "this" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.this[0].metadata[0].name
+    name      = kubernetes_cluster_role_v1.this[0].metadata[0].name
   }
 
   subject {
